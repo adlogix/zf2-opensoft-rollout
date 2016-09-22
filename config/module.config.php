@@ -11,9 +11,11 @@
 return [
 
     'rollout' => [
+        'storage_service' => 'zf2_rollout_storage_array',
 
-        'storage_service' => 'zf2_rollout_storage_array'
-
+        'zend_db_storage' => [
+            'table_name' => 'rollout_feature'
+        ]
     ],
 
     'service_manager' => [
@@ -28,6 +30,7 @@ return [
 
             'zf2_rollout_config'          => 'Adlogix\Zf2Rollout\Service\Factory\ConfigServiceFactory',
             'zf2_rollout_storage_factory' => 'Adlogix\Zf2Rollout\Service\Factory\RolloutStorageFactory',
+            'zf2_rollout_storage_zend_db' => 'Adlogix\Zf2Rollout\Service\Factory\RolloutZendDbAdapterStorageFactory',
 
             'zf2_rollout' => 'Adlogix\Zf2Rollout\Service\Factory\RolloutFactory'
 
