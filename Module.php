@@ -12,6 +12,7 @@
 namespace Adlogix\Zf2Rollout;
 
 
+use Opensoft\Rollout\Rollout;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\ViewHelperProviderInterface;
@@ -52,6 +53,7 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Vi
             'factories' => [
                 'rollout_is_active' => function (AbstractPluginManager $pluginManager) {
                     $serviceLocator = $pluginManager->getServiceLocator();
+                    /** @var Rollout $rollout */
                     $rollout = $serviceLocator->get('zf2_rollout');
                     return new View\Helper\IsActive($rollout);
                 }

@@ -16,6 +16,7 @@ use Adlogix\Zf2Rollout\Storage\ZendDbAdapterStorage;
 use PHPUnit_Framework_TestCase;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\Adapter\Driver\StatementInterface;
+use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\ResultSet\ResultSet;
 
 class ZendDbAdapterStorageTest extends PHPUnit_Framework_TestCase
@@ -40,7 +41,8 @@ class ZendDbAdapterStorageTest extends PHPUnit_Framework_TestCase
         $adapter = $this->createMock(Adapter::class);
         $adapter->expects($this->once())
             ->method('createStatement')
-            ->with(str_replace(':table', 'some_table', ZendDbAdapterStorage::STMT_SELECT), ['key' => 'some_key'])
+            ->with(str_replace(':table', 'some_table', ZendDbAdapterStorage::STMT_SELECT),
+                new ParameterContainer(['key' => 'some_key']))
             ->willReturn($statement);
 
         $storage = new ZendDbAdapterStorage($adapter, 'some_table');
@@ -69,8 +71,14 @@ class ZendDbAdapterStorageTest extends PHPUnit_Framework_TestCase
         $adapter->expects($this->exactly(2))
             ->method('createStatement')
             ->withConsecutive(
-                [str_replace(':table', 'some_table', ZendDbAdapterStorage::STMT_SELECT), ['key' => 'some_key']],
-                [str_replace(':table', 'some_table', ZendDbAdapterStorage::STMT_UPDATE), ['key' => 'some_key', 'value' => 'some_settings']]
+                [
+                    str_replace(':table', 'some_table', ZendDbAdapterStorage::STMT_SELECT),
+                    new ParameterContainer(['key' => 'some_key'])
+                ],
+                [
+                    str_replace(':table', 'some_table', ZendDbAdapterStorage::STMT_UPDATE),
+                    new ParameterContainer(['key' => 'some_key', 'value' => 'some_settings'])
+                ]
             )
             ->willReturn($statement);
 
@@ -100,8 +108,14 @@ class ZendDbAdapterStorageTest extends PHPUnit_Framework_TestCase
         $adapter->expects($this->exactly(2))
             ->method('createStatement')
             ->withConsecutive(
-                [str_replace(':table', 'some_table', ZendDbAdapterStorage::STMT_SELECT), ['key' => 'some_key']],
-                [str_replace(':table', 'some_table', ZendDbAdapterStorage::STMT_INSERT), ['key' => 'some_key', 'value' => 'some_settings']]
+                [
+                    str_replace(':table', 'some_table', ZendDbAdapterStorage::STMT_SELECT),
+                    new ParameterContainer(['key' => 'some_key'])
+                ],
+                [
+                    str_replace(':table', 'some_table', ZendDbAdapterStorage::STMT_INSERT),
+                    new ParameterContainer(['key' => 'some_key', 'value' => 'some_settings'])
+                ]
             )
             ->willReturn($statement);
 
@@ -122,7 +136,8 @@ class ZendDbAdapterStorageTest extends PHPUnit_Framework_TestCase
         $adapter = $this->createMock(Adapter::class);
         $adapter->expects($this->once())
             ->method('createStatement')
-            ->with(str_replace(':table', 'some_table', ZendDbAdapterStorage::STMT_DELETE), ['key' => 'some_key'])
+            ->with(str_replace(':table', 'some_table', ZendDbAdapterStorage::STMT_DELETE),
+                new ParameterContainer(['key' => 'some_key']))
             ->willReturn($statement);
 
         $storage = new ZendDbAdapterStorage($adapter, 'some_table');

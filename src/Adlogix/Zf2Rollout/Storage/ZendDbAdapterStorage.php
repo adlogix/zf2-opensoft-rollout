@@ -14,6 +14,7 @@ namespace Adlogix\Zf2Rollout\Storage;
 
 use Opensoft\Rollout\Storage\StorageInterface;
 use Zend\Db\Adapter\Adapter;
+use Zend\Db\Adapter\ParameterContainer;
 
 class ZendDbAdapterStorage implements StorageInterface
 {
@@ -46,7 +47,8 @@ class ZendDbAdapterStorage implements StorageInterface
      */
     public function get($key)
     {
-        $statement = $this->adapter->createStatement($this->getSQLStatement(self::STMT_SELECT), ['key' => $key]);
+        $statement = $this->adapter->createStatement($this->getSQLStatement(self::STMT_SELECT),
+            new ParameterContainer(['key' => $key]));
         $resultSet = $statement->execute();
 
         $row = $resultSet->current();
@@ -67,7 +69,8 @@ class ZendDbAdapterStorage implements StorageInterface
         } else {
             $sql = self::STMT_UPDATE;
         }
-        $statement = $this->adapter->createStatement($this->getSQLStatement($sql), ['key' => $key, 'value' => $value]);
+        $statement = $this->adapter->createStatement($this->getSQLStatement($sql),
+            new ParameterContainer(['key' => $key, 'value' => $value]));
         $statement->execute();
     }
 
@@ -78,7 +81,8 @@ class ZendDbAdapterStorage implements StorageInterface
      */
     public function remove($key)
     {
-        $statement = $this->adapter->createStatement($this->getSQLStatement(self::STMT_DELETE), ['key' => $key]);
+        $statement = $this->adapter->createStatement($this->getSQLStatement(self::STMT_DELETE),
+            new ParameterContainer(['key' => $key]));
         $statement->execute();
     }
 

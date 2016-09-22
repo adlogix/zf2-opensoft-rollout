@@ -28,14 +28,14 @@ class RolloutStorageFactory implements FactoryInterface
         /** @var array $config */
         $config = $serviceLocator->get('zf2_rollout_config');
 
-        if (!isset($config[static::$storage_service]) || $config[static::$storage_service] === '') {
-            throw new \RuntimeException('No "' . static::$storage_service . '" defined in the rollout configuration!"');
+        if (!isset($config[self::$storage_service]) || $config[self::$storage_service] === '') {
+            throw new \RuntimeException('No "' . self::$storage_service . '" defined in the rollout configuration!"');
         }
 
-        $storage = $serviceLocator->get($config[static::$storage_service]);
+        $storage = $serviceLocator->get($config[self::$storage_service]);
 
         if (!$storage instanceof StorageInterface) {
-            throw new \RuntimeException(sprintf('The "' . static::$storage_service . '" should be an instance of StorageInterface but was %s',
+            throw new \RuntimeException(sprintf('The "' . self::$storage_service . '" should be an instance of StorageInterface but was %s',
                 get_class($storage)));
         }
 

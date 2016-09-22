@@ -13,6 +13,7 @@ namespace Adlogix\Zf2Rollout\Service\Factory;
 
 
 use Adlogix\Zf2Rollout\Storage\ZendDbAdapterStorage;
+use Zend\Db\Adapter\Adapter;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -30,6 +31,7 @@ class RolloutZendDbAdapterStorageFactory implements FactoryInterface
             throw new \RuntimeException('Missing table_name config when using zend db storage!');
         }
 
+        /** @var Adapter $adapter */
         $adapter = $serviceLocator->get('Zend\Db\Adapter\Adapter');
 
         return new ZendDbAdapterStorage($adapter, $rolloutConfig['zend_db_storage']['table_name']);
