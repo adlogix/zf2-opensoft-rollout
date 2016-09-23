@@ -15,7 +15,7 @@ return [
     ],
     'service_manager' => [
         'invokables' => [
-            'zf2_rollout_storage_dummy' => 'Adlogix\Zf2RolloutTest\Storage\RolloutDummyStorage'
+            'zf2_rollout_storage_dummy' => Adlogix\Zf2RolloutTest\Storage\RolloutDummyStorage::class
         ]
     ]
 ];

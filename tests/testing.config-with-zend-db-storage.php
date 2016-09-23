@@ -12,8 +12,8 @@
 return [
 
     'db' => [
-        'driver' => 'pdo',
-        'dsn'    => 'mysql:dbname=demo;host=localhost',
+        'driver'   => 'pdo',
+        'dsn'      => 'mysql:dbname=demo;host=localhost',
         'username' => 'root',
         'password' => ''
     ],
@@ -24,7 +24,7 @@ return [
 
     'service_manager' => [
         'factories' => [
-            'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory'
+            'Zend\Db\Adapter\Adapter' => Zend\Db\Adapter\AdapterServiceFactory::class
         ],
     ]
 ];
