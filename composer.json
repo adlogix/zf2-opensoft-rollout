@@ -35,7 +35,7 @@
     },
     "autoload-dev": {
         "psr-0": {
-            "Adlogix\\Zf2Rollout\\": "src/"
+            "Adlogix\\Zf2RolloutTest\\": "tests/"
         },
         "classmap": [
             "./"
