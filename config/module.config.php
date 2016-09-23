@@ -15,6 +15,10 @@ return [
 
         'zend_db_storage' => [
             'table_name' => 'rollout_feature'
+        ],
+
+        'doctrine_storage' => [
+            'class_name' => 'Feature'
         ]
     ],
 
@@ -28,9 +32,10 @@ return [
 
         'factories' => [
 
-            'zf2_rollout_config'          => Adlogix\Zf2Rollout\Service\Factory\ConfigServiceFactory::class,
-            'zf2_rollout_storage_factory' => Adlogix\Zf2Rollout\Service\Factory\RolloutStorageFactory::class,
-            'zf2_rollout_storage_zend_db' => Adlogix\Zf2Rollout\Service\Factory\RolloutZendDbAdapterStorageFactory::class,
+            'zf2_rollout_config'           => Adlogix\Zf2Rollout\Service\Factory\ConfigServiceFactory::class,
+            'zf2_rollout_storage_factory'  => Adlogix\Zf2Rollout\Service\Factory\RolloutStorageFactory::class,
+            'zf2_rollout_storage_zend_db'  => Adlogix\Zf2Rollout\Service\Factory\RolloutZendDbAdapterStorageFactory::class,
+            'zf2_rollout_storage_doctrine' => Adlogix\Zf2Rollout\Service\Factory\DoctrineORMStorageFactory::class,
 
             'zf2_rollout' => Adlogix\Zf2Rollout\Service\Factory\RolloutFactory::class
 
