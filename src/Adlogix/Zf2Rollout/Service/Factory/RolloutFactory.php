@@ -13,8 +13,6 @@
 namespace Adlogix\Zf2Rollout\Service\Factory;
 
 use Opensoft\Rollout\Rollout;
-use Opensoft\Rollout\Storage\ArrayStorage;
-use Opensoft\Rollout\Storage\RedisStorageAdapter;
 use Opensoft\Rollout\Storage\StorageInterface;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
