@@ -11,7 +11,7 @@
 
 namespace Adlogix\Zf2Rollout\Storage\Doctrine;
 
-use Adlogix\Zf2Rollout\Entity\Feature;
+use Adlogix\Zf2Rollout\Entity\FeatureInterface;
 use Doctrine\ORM\EntityManager;
 use Opensoft\Rollout\Storage\StorageInterface;
 /**
@@ -47,7 +47,7 @@ class DoctrineORMStorage implements StorageInterface
      */
     public function get($key)
     {
-        /** @var Feature $feature */
+        /** @var FeatureInterface $feature */
         $feature = $this->repository->findOneBy(array('name' => $key));
         if (!$feature) {
             return null;
@@ -60,10 +60,10 @@ class DoctrineORMStorage implements StorageInterface
      */
     public function set($key, $value)
     {
-        /** @var Feature $feature */
+        /** @var FeatureInterface $feature */
         $feature = $this->repository->findOneBy(array('name' => $key));
         if (!$feature) {
-            $feature = new Feature();
+            $feature = new $this->class();
         }
         $feature->setName($key);
         $feature->setSettings($value);

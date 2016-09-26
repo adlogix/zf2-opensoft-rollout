@@ -12,8 +12,8 @@
 namespace Adlogix\Zf2RolloutTest\Storage\Doctrine;
 
 
-use Adlogix\Zf2Rollout\Entity\Feature;
 use Adlogix\Zf2Rollout\Storage\Doctrine\DoctrineORMStorage;
+use Adlogix\Zf2RolloutTest\Entity\Feature;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use PHPUnit_Framework_TestCase;
@@ -26,7 +26,7 @@ class DoctrineORMStorageTest extends PHPUnit_Framework_TestCase
      */
     public function get_WithValidKey_ReturnsSettings()
     {
-        $class = "Feature";
+        $class = Feature::class;
 
         $repository = $this->createMock(EntityRepository::class);
         $repository->expects($this->once())
@@ -48,7 +48,7 @@ class DoctrineORMStorageTest extends PHPUnit_Framework_TestCase
      */
     public function set_WithExistingKeyAndSetting_UpdatesCorrectly()
     {
-        $class = "Feature";
+        $class = Feature::class;
 
         $feature = new Feature();
         $feature->setName('hello_world');
@@ -82,7 +82,7 @@ class DoctrineORMStorageTest extends PHPUnit_Framework_TestCase
      */
     public function set_WithNewKeyAndSetting_InsertsCorrectly()
     {
-        $class = "Feature";
+        $class = Feature::class;
 
         $repository = $this->createMock(EntityRepository::class);
         $repository->expects($this->once())
@@ -112,7 +112,7 @@ class DoctrineORMStorageTest extends PHPUnit_Framework_TestCase
      */
     public function remove_WithValidKey_Removes()
     {
-        $class = "Feature";
+        $class = Feature::class;
 
         $feature = new Feature();
         $feature->setName('hello_world');

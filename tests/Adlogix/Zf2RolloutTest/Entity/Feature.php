@@ -9,8 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Adlogix\Zf2Rollout\Entity;
+namespace Adlogix\Zf2RolloutTest\Entity;
 
+use Adlogix\Zf2Rollout\Entity\FeatureInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -19,7 +20,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="rollout_feature")
  * @ORM\Entity()
  */
-class Feature
+class Feature implements FeatureInterface
 {
     /**
      * @var string
