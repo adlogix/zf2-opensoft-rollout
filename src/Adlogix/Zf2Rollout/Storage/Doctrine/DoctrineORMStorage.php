@@ -12,48 +12,30 @@
 namespace Adlogix\Zf2Rollout\Storage\Doctrine;
 
 use Adlogix\Zf2Rollout\Entity\FeatureInterface;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 use Opensoft\Rollout\Storage\StorageInterface;
+
 /**
  * @author Richard Fullmer <richard.fullmer@opensoftdev.com>
  */
-class DoctrineORMStorage implements StorageInterface
+class DoctrineORMStorage extends EntityRepository implements StorageInterface
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
-     */
-    protected $em;
-    /**
-     * @var \Doctrine\ORM\EntityRepository
-     */
-    protected $repository;
-    /**
-     * @var string
-     */
-    protected $class;
-    /**
-     * @param EntityManager $em
-     * @param string        $class
-     */
-    public function __construct(EntityManager $em, $class)
-    {
-        $this->em = $em;
-        $this->repository = $em->getRepository($class);
-        $this->class = $class;
-    }
-    /**
-     * @param  string     $key
+     * @param  string $key
+     *
      * @return mixed|null Null if the value is not found
      */
     public function get($key)
     {
         /** @var FeatureInterface $feature */
-        $feature = $this->repository->findOneBy(array('name' => $key));
+        $feature = $this->findOneBy(array('name' => $key));
         if (!$feature) {
             return null;
         }
+
         return $feature->getSettings();
     }
+
     /**
      * @param string $key
      * @param mixed  $value
@@ -61,24 +43,26 @@ class DoctrineORMStorage implements StorageInterface
     public function set($key, $value)
     {
         /** @var FeatureInterface $feature */
-        $feature = $this->repository->findOneBy(array('name' => $key));
+        $feature = $this->findOneBy(array('name' => $key));
         if (!$feature) {
-            $feature = new $this->class();
+            $className = $this->getClassName();
+            $feature = new $className();
         }
         $feature->setName($key);
         $feature->setSettings($value);
-        $this->em->persist($feature);
-        $this->em->flush($feature);
+        $this->_em->persist($feature);
+        $this->_em->flush($feature);
     }
+
     /**
      * @param string $key
      */
     public function remove($key)
     {
-        $feature = $this->repository->findOneBy(array('name' => $key));
+        $feature = $this->findOneBy(array('name' => $key));
         if ($feature) {
-            $this->em->remove($feature);
-            $this->em->flush($feature);
+            $this->_em->remove($feature);
+            $this->_em->flush($feature);
         }
     }
 }

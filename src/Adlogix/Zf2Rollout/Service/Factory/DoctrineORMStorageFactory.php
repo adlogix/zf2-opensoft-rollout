@@ -39,6 +39,9 @@ class DoctrineORMStorageFactory implements FactoryInterface
             throw new \RuntimeException('No "[ doctrine_storage => class_name => "some_class"]" defined in the rollout configuration!"');
         }
 
-        return new DoctrineORMStorage($em, $rolloutConfig['doctrine_storage']['class_name']);
+        $class = $em->getMetadataFactory()->getMetadataFor($rolloutConfig['doctrine_storage']['class_name']);
+
+        /** @noinspection PhpParamsInspection */
+        return new DoctrineORMStorage($em, $class);
     }
 }

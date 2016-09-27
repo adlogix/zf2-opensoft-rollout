@@ -15,7 +15,7 @@ namespace Adlogix\Zf2RolloutTest\Storage\Doctrine;
 use Adlogix\Zf2Rollout\Storage\Doctrine\DoctrineORMStorage;
 use Adlogix\Zf2RolloutTest\Entity\Feature;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use PHPUnit_Framework_TestCase;
 
 class DoctrineORMStorageTest extends PHPUnit_Framework_TestCase
@@ -26,20 +26,19 @@ class DoctrineORMStorageTest extends PHPUnit_Framework_TestCase
      */
     public function get_WithValidKey_ReturnsSettings()
     {
-        $class = Feature::class;
+        $class = $this->createMock(ClassMetadata::class);
 
-        $repository = $this->createMock(EntityRepository::class);
-        $repository->expects($this->once())
+        $em = $this->createMock(EntityManager::class);
+
+        $storage = $this->getMockBuilder(DoctrineORMStorage::class)
+            ->setConstructorArgs([$em, $class])
+            ->setMethods(['findOneBy'])
+            ->getMock();
+
+        $storage->expects($this->once())
             ->method('findOneBy')
             ->with(['name' => 'some_name']);
 
-        $em = $this->createMock(EntityManager::class);
-        $em->expects($this->once())
-            ->method('getRepository')
-            ->willReturn($repository)
-            ->with($class);
-
-        $storage = new DoctrineORMStorage($em, $class);
         $this->assertNull($storage->get('some_name'));
     }
 
@@ -48,23 +47,23 @@ class DoctrineORMStorageTest extends PHPUnit_Framework_TestCase
      */
     public function set_WithExistingKeyAndSetting_UpdatesCorrectly()
     {
-        $class = Feature::class;
-
-        $feature = new Feature();
-        $feature->setName('hello_world');
-        $feature->setSettings('some_value');
-
-        $repository = $this->createMock(EntityRepository::class);
-        $repository->expects($this->once())
-            ->method('findOneBy')
-            ->with(['name' => $feature->getName()])
-            ->willReturn($feature);
+        $class = $this->createMock(ClassMetadata::class);
 
         $em = $this->createMock(EntityManager::class);
-        $em->expects($this->once())
-            ->method('getRepository')
-            ->with($class)
-            ->willReturn($repository);
+
+        $feature = new Feature();
+        $feature->setName('some_name');
+        $feature->setSettings('some_value');
+
+        $storage = $this->getMockBuilder(DoctrineORMStorage::class)
+            ->setConstructorArgs([$em, $class])
+            ->setMethods(['findOneBy', 'getClassName'])
+            ->getMock();
+
+        $storage->expects($this->once())
+            ->method('findOneBy')
+            ->with(['name' => 'some_name'])
+            ->willReturn($feature);
 
         $em->expects($this->once())
             ->method('persist')
@@ -73,7 +72,7 @@ class DoctrineORMStorageTest extends PHPUnit_Framework_TestCase
             ->method('flush')
             ->with($feature);
 
-        $storage = new DoctrineORMStorage($em, $class);
+        /** @var DoctrineORMStorage $storage */
         $storage->set($feature->getName(), 'some_new_value');
     }
 
@@ -82,19 +81,22 @@ class DoctrineORMStorageTest extends PHPUnit_Framework_TestCase
      */
     public function set_WithNewKeyAndSetting_InsertsCorrectly()
     {
-        $class = Feature::class;
-
-        $repository = $this->createMock(EntityRepository::class);
-        $repository->expects($this->once())
-            ->method('findOneBy')
-            ->with(['name' => 'some_name'])
-            ->willReturn(null);
+        $class = $this->createMock(ClassMetadata::class);
 
         $em = $this->createMock(EntityManager::class);
-        $em->expects($this->once())
-            ->method('getRepository')
-            ->with($class)
-            ->willReturn($repository);
+
+        $storage = $this->getMockBuilder(DoctrineORMStorage::class)
+            ->setConstructorArgs([$em, $class])
+            ->setMethods(['findOneBy', 'getClassName'])
+            ->getMock();
+
+        $storage->expects($this->once())
+            ->method('findOneBy')
+            ->with(['name' => 'some_name']);
+
+        $storage->expects($this->once())
+            ->method('getClassName')
+            ->willReturn(Feature::class);
 
         $em->expects($this->once())
             ->method('persist')
@@ -103,7 +105,7 @@ class DoctrineORMStorageTest extends PHPUnit_Framework_TestCase
             ->method('flush')
             ->with($this->isInstanceOf(Feature::class));
 
-        $storage = new DoctrineORMStorage($em, $class);
+        /** @var DoctrineORMStorage $storage */
         $storage->set('some_name', 'some_new_value');
     }
 
@@ -112,23 +114,23 @@ class DoctrineORMStorageTest extends PHPUnit_Framework_TestCase
      */
     public function remove_WithValidKey_Removes()
     {
-        $class = Feature::class;
-
-        $feature = new Feature();
-        $feature->setName('hello_world');
-        $feature->setSettings('some_value');
-
-        $repository = $this->createMock(EntityRepository::class);
-        $repository->expects($this->once())
-            ->method('findOneBy')
-            ->with(['name' => $feature->getName()])
-            ->willReturn($feature);
+        $class = $this->createMock(ClassMetadata::class);
 
         $em = $this->createMock(EntityManager::class);
-        $em->expects($this->once())
-            ->method('getRepository')
-            ->with($class)
-            ->willReturn($repository);
+
+        $feature = new Feature();
+        $feature->setName('some_name');
+        $feature->setSettings('some_value');
+
+        $storage = $this->getMockBuilder(DoctrineORMStorage::class)
+            ->setConstructorArgs([$em, $class])
+            ->setMethods(['findOneBy'])
+            ->getMock();
+
+        $storage->expects($this->once())
+            ->method('findOneBy')
+            ->with(['name' => 'some_name'])
+            ->willReturn($feature);
 
         $em->expects($this->once())
             ->method('remove')
@@ -137,7 +139,7 @@ class DoctrineORMStorageTest extends PHPUnit_Framework_TestCase
             ->method('flush')
             ->with($feature);
 
-        $storage = new DoctrineORMStorage($em, $class);
+        /** @var DoctrineORMStorage $storage */
         $storage->remove($feature->getName());
     }
 }
