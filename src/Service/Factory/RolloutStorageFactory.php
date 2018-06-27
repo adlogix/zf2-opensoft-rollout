@@ -12,6 +12,7 @@
 namespace Adlogix\Zf2Rollout\Service\Factory;
 
 
+use Interop\Container\ContainerInterface;
 use Opensoft\Rollout\Storage\StorageInterface;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -25,14 +26,22 @@ class RolloutStorageFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
+        return $this($serviceLocator, null);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    {
         /** @var array $config */
-        $config = $serviceLocator->get('zf2_rollout_config');
+        $config = $container->get('zf2_rollout_config');
 
         if (!isset($config[self::$storage_service]) || $config[self::$storage_service] === '') {
             throw new \RuntimeException('No "' . self::$storage_service . '" defined in the rollout configuration!"');
         }
 
-        $storage = $serviceLocator->get($config[self::$storage_service]);
+        $storage = $container->get($config[self::$storage_service]);
 
         if (!$storage instanceof StorageInterface) {
             throw new \RuntimeException(sprintf('The "' . self::$storage_service . '" should be an instance of StorageInterface but was %s',

@@ -12,6 +12,7 @@
 
 namespace Adlogix\Zf2Rollout\Service\Factory;
 
+use Interop\Container\ContainerInterface;
 use Opensoft\Rollout\Rollout;
 use Opensoft\Rollout\Storage\StorageInterface;
 use Zend\ServiceManager\FactoryInterface;
@@ -25,8 +26,16 @@ class RolloutFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
+        return $this($serviceLocator, null);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    {
         /** @var StorageInterface $storage */
-        $storage = $serviceLocator->get('zf2_rollout_storage_factory');
+        $storage = $container->get('zf2_rollout_storage_factory');
 
         return new Rollout($storage);
     }

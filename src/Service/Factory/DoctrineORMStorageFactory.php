@@ -14,6 +14,7 @@ namespace Adlogix\Zf2Rollout\Service\Factory;
 
 use Adlogix\Zf2Rollout\Storage\Doctrine\DoctrineORMStorage;
 use Doctrine\ORM\EntityManager;
+use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -21,19 +22,23 @@ class DoctrineORMStorageFactory implements FactoryInterface
 {
 
     /**
-     * Create service
-     *
-     * @param ServiceLocatorInterface $serviceLocator
-     *
-     * @return mixed
+     * {@inheritdoc}
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
+        return $this($serviceLocator, null);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    {
         /** @var EntityManager $em */
-        $em = $serviceLocator->get('doctrine.entitymanager.orm_default');
+        $em = $container->get('doctrine.entitymanager.orm_default');
 
         /** @var array $rolloutConfig */
-        $rolloutConfig = $serviceLocator->get('zf2_rollout_config');
+        $rolloutConfig = $container->get('zf2_rollout_config');
 
         if (!isset($rolloutConfig['doctrine_storage']['class_name'])) {
             throw new \RuntimeException('No "[ doctrine_storage => class_name => "some_class"]" defined in the rollout configuration!"');

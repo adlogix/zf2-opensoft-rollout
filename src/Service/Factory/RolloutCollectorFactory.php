@@ -12,6 +12,7 @@
 namespace Adlogix\Zf2Rollout\Service\Factory;
 
 use Collector\RolloutCollector;
+use Interop\Container\ContainerInterface;
 use Opensoft\Rollout\Rollout;
 use Opensoft\Rollout\RolloutUserInterface;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
@@ -29,19 +30,27 @@ final class RolloutCollectorFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
+        return $this($serviceLocator, null);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    {
         /** @var array $config */
-        $config = $serviceLocator->get('zf2_rollout_config');
+        $config = $container->get('zf2_rollout_config');
 
 
         /** @var Rollout $rollout */
-        $rollout = $serviceLocator->get('zf2_rollout');
+        $rollout = $container->get('zf2_rollout');
 
-        if (!$serviceLocator->has($config['user'])) {
+        if (!$container->has($config['user'])) {
             throw new ServiceNotCreatedException(sprintf('You must define a service for %s', $config['user']));
         }
 
         /** @var RolloutUserInterface $rolloutUser */
-        $rolloutUser = $serviceLocator->get($config['user']);
+        $rolloutUser = $container->get($config['user']);
 
         return new RolloutCollector($rollout, $rolloutUser);
     }

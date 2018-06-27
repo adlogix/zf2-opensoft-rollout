@@ -12,6 +12,7 @@
 namespace Adlogix\Zf2Rollout\Service\Factory;
 
 
+use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -22,6 +23,14 @@ class ConfigServiceFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        return $serviceLocator->get('Config')['rollout'];
+        return $this($serviceLocator, null);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    {
+        return $container->get('Config')['rollout'];
     }
 }
