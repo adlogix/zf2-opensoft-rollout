@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Adlogix\Zf2RolloutTest\Storage\Doctrine;
+namespace Adlogix\Zf2Rollout\Test\Storage\Doctrine;
 
 
 use Adlogix\Zf2Rollout\Storage\Doctrine\DoctrineORMStorage;
-use Adlogix\Zf2RolloutTest\Entity\Feature;
+use Adlogix\Zf2Rollout\Test\Entity\Feature;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use PHPUnit_Framework_TestCase;

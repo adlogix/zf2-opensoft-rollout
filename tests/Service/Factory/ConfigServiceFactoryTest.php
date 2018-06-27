@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Adlogix package.
  *
@@ -9,23 +10,21 @@
  * file that was distributed with this source code.
  */
 
-namespace Adlogix\Zf2RolloutTest\Service\Factory;
+namespace Adlogix\Zf2Rollout\Test\Service\Factory;
 
-
-use Adlogix\Zf2RolloutTest\Util\ServiceManagerFactory;
-use Opensoft\Rollout\Rollout;
+use Adlogix\Zf2Rollout\Test\Util\ServiceManagerFactory;
 use PHPUnit_Framework_TestCase;
 
-class RolloutFactoryTest extends PHPUnit_Framework_TestCase
+class ConfigServiceFactoryTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @test
      */
     public function construction_ThroughServiceManager_Instantiates()
     {
-        $rollout = ServiceManagerFactory::getServiceManager()
-            ->get('zf2_rollout');
+        $config = ServiceManagerFactory::getServiceManager()
+            ->get('zf2_rollout_config');
 
-        $this->assertTrue($rollout instanceof Rollout);
+        $this->assertTrue(array_key_exists('storage_service', $config));
     }
 }

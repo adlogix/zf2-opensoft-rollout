@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Adlogix\Zf2RolloutTest\Service\Factory;
+namespace Adlogix\Zf2Rollout\Test\Service\Factory;
 
 
 use Adlogix\Zf2Rollout\Service\Factory\DoctrineORMStorageFactory;
 use Adlogix\Zf2Rollout\Storage\Doctrine\DoctrineORMStorage;
-use Adlogix\Zf2RolloutTest\Entity\Feature;
+use Adlogix\Zf2Rollout\Test\Entity\Feature;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\ClassMetadataFactory;

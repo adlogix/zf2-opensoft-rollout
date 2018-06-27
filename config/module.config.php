@@ -11,6 +11,9 @@
 return [
 
     'rollout' => [
+
+        'user' => 'zf2_rollout_user',
+
         'storage_service' => 'zf2_rollout_storage_array',
 
         'zend_db_storage' => [
@@ -32,15 +35,30 @@ return [
 
         'factories' => [
 
-            'zf2_rollout_config'           => Adlogix\Zf2Rollout\Service\Factory\ConfigServiceFactory::class,
-            'zf2_rollout_storage_factory'  => Adlogix\Zf2Rollout\Service\Factory\RolloutStorageFactory::class,
-            'zf2_rollout_storage_zend_db'  => Adlogix\Zf2Rollout\Service\Factory\RolloutZendDbAdapterStorageFactory::class,
+            'zf2_rollout_config' => Adlogix\Zf2Rollout\Service\Factory\ConfigServiceFactory::class,
+            'zf2_rollout_storage_factory' => Adlogix\Zf2Rollout\Service\Factory\RolloutStorageFactory::class,
+            'zf2_rollout_storage_zend_db' => Adlogix\Zf2Rollout\Service\Factory\RolloutZendDbAdapterStorageFactory::class,
             'zf2_rollout_storage_doctrine' => Adlogix\Zf2Rollout\Service\Factory\DoctrineORMStorageFactory::class,
 
-            'zf2_rollout' => Adlogix\Zf2Rollout\Service\Factory\RolloutFactory::class
+            'zf2_rollout' => Adlogix\Zf2Rollout\Service\Factory\RolloutFactory::class,
+
+            'zf2_rollout.toolbar.collector' => \Adlogix\Zf2Rollout\Service\Factory\RolloutCollectorFactory::class
 
         ]
 
-    ]
+    ],
+
+    'zenddevelopertools' => [
+        'profiler' => [
+            'collectors' => [
+                'zf2_rollout.toolbar' => 'zf2_rollout.toolbar.collector',
+            ],
+        ],
+        'toolbar' => [
+            'entries' => [
+                'zf2_rollout.toolbar' => 'zend-developer-tools/toolbar/rollout',
+            ],
+        ],
+    ],
 
 ];

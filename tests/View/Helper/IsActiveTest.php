@@ -10,10 +10,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Adlogix\Zf2RolloutTest\View\Helper;
+namespace Adlogix\Zf2Rollout\Test\View\Helper;
 
 use Adlogix\Zf2Rollout\View\Helper\IsActive;
-use Adlogix\Zf2RolloutTest\Util\ServiceManagerFactory;
+use Adlogix\Zf2Rollout\Test\Util\ServiceManagerFactory;
 use Opensoft\Rollout\Rollout;
 use Opensoft\Rollout\RolloutUserInterface;
 use Zend\View\HelperPluginManager;

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Adlogix\Zf2RolloutTest\Storage;
+namespace Adlogix\Zf2Rollout\Test\Storage;
 
 
 use Adlogix\Zf2Rollout\Storage\ZendDbAdapterStorage;

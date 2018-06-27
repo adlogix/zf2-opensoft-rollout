@@ -10,10 +10,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Adlogix\Zf2RolloutTest\Service\Factory;
+namespace Adlogix\Zf2Rollout\Test\Service\Factory;
 
-use Adlogix\Zf2RolloutTest\Storage\RolloutDummyStorage;
-use Adlogix\Zf2RolloutTest\Util\ServiceManagerFactory;
+use Adlogix\Zf2Rollout\Test\Storage\RolloutDummyStorage;
+use Adlogix\Zf2Rollout\Test\Util\ServiceManagerFactory;
 use Opensoft\Rollout\Storage\StorageInterface;
 use PHPUnit_Framework_TestCase;
 

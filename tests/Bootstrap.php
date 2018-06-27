@@ -11,7 +11,7 @@
 
 ini_set('error_reporting', E_ALL);
 
-$files = array(__DIR__ . '/../vendor/autoload.php', __DIR__ . '/../../../autoload.php');
+$files = array(__DIR__ . '/../vendor/autoload.php');
 
 foreach ($files as $file) {
     if (file_exists($file)) {
@@ -25,11 +25,11 @@ if (!isset($loader)) {
 }
 
 /* @var $loader \Composer\Autoload\ClassLoader */
-$loader->add('Adlogix\Zf2RolloutTest\\', __DIR__);
+$loader->addPsr4('Adlogix\Zf2Rollout\Test\\', __DIR__);
 
 /** @noinspection PhpIncludeInspection */
 if (!$config = @include __DIR__ . '/TestConfiguration.php') {
     $config = require __DIR__ . '/TestConfiguration.php.dist';
 }
 
-\Adlogix\Zf2RolloutTest\Util\ServiceManagerFactory::setConfig($config);
+\Adlogix\Zf2Rollout\Test\Util\ServiceManagerFactory::setConfig($config);

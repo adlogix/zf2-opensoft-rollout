@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Adlogix\Zf2RolloutTest\Entity;
+namespace Adlogix\Zf2Rollout\Test\Entity;
 
 use Adlogix\Zf2Rollout\Entity\FeatureInterface;
 use Doctrine\ORM\Mapping as ORM;

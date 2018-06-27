@@ -10,7 +10,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Adlogix\Zf2RolloutTest\Util;
+namespace Adlogix\Zf2Rollout\Test\Util;
 
 use Zend\Mvc\Service\ServiceManagerConfig;
 use Zend\ServiceManager\ServiceManager;
@@ -37,7 +37,7 @@ class ServiceManagerFactory
      */
     public static function overrideModuleConfiguration($configFile)
     {
-        $configFilePath = __DIR__ . '/../../../' . $configFile;
+        $configFilePath = __DIR__ . '/../../tests/' . $configFile;
         if (!file_exists($configFilePath)) {
             throw new \RuntimeException(sprintf('The config file "%s" does not exist', $configFilePath));
         }

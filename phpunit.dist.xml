@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
-<phpunit bootstrap="./Bootstrap.php" colors="true">
+<phpunit bootstrap="tests/Bootstrap.php" colors="true">
     <testsuite name="Adlogix Zf2RolloutTest tests">
-        <directory>./</directory>
+        <directory>tests/</directory>
     </testsuite>
     <filter>
         <whitelist addUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">./src</directory>
+            <directory suffix=".php">src/</directory>
         </whitelist>
     </filter>
 </phpunit>
