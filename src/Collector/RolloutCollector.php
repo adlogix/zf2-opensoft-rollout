@@ -63,7 +63,7 @@ final class RolloutCollector implements CollectorInterface
      */
     public function getName()
     {
-        return 'feature-flag';
+        return 'zf2_rollout.toolbar';
     }
 
     /**
