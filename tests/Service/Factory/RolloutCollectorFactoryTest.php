@@ -42,6 +42,8 @@ final class RolloutCollectorFactoryTest extends TestCase
      */
     public function createService_withoutRolloutUserDefined_shouldThrowExplicitException()
     {
+        ServiceManagerFactory::overrideModuleConfiguration('testing.config.php');
+
         try {
 
             ServiceManagerFactory::getServiceManager()
