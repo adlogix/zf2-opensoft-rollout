@@ -25,6 +25,15 @@ return [
         ]
     ],
 
+    'view_manager' => [
+        'template_path_stack' => [
+            __DIR__ . '/../view',
+        ],
+        'template_map' => [
+            'zend-developer-tools/toolbar/rollout' => __DIR__ . '/../view/zend-developer-tools/toolbar/rollout.phtml',
+        ],
+    ],
+
     'service_manager' => [
 
         'invokables' => [
