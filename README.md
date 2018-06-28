@@ -15,7 +15,7 @@ composer require adlogix/zf2-opensoft-rollout ~1.0
 
 2. Add the `Adlogix\Zf2Rollout` module to the module section of your `config/application.config.php`
 
-#Configuration
+# Configuration
 
 Rollout parameters can be defined in the application configurations:
 
