@@ -12,7 +12,7 @@ return [
 
     'rollout' => [
 
-        'user' => 'zf2_rollout_user',
+        'user_service' => null,
 
         'storage_service' => 'zf2_rollout_storage_array',
 
@@ -21,7 +21,7 @@ return [
         ],
 
         'doctrine_storage' => [
-            'class_name' => 'Feature'
+            'class_name' => ''
         ]
     ],
 

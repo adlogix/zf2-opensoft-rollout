@@ -45,12 +45,19 @@ final class RolloutCollectorFactory implements FactoryInterface
         /** @var Rollout $rollout */
         $rollout = $container->get('zf2_rollout');
 
-        if (!$container->has($config['user'])) {
-            throw new ServiceNotCreatedException(sprintf('You must define a service for %s', $config['user']));
+        $rolloutUserServiceId = $config['user_service'];
+
+        if (!isset($rolloutUserServiceId)) {
+            throw new ServiceNotCreatedException(sprintf('You must define a service for rollout user_service.'));
+        }
+
+        if (!$container->has($rolloutUserServiceId)) {
+            throw new ServiceNotCreatedException(sprintf('Defined rollout user_service \'%s\' is not configured!',
+                $rolloutUserServiceId));
         }
 
         /** @var RolloutUserInterface $rolloutUser */
-        $rolloutUser = $container->get($config['user']);
+        $rolloutUser = $container->get($rolloutUserServiceId);
 
         return new RolloutCollector($rollout, $rolloutUser);
     }

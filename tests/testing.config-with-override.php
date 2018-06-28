@@ -11,6 +11,7 @@
 
 return [
     'rollout'         => [
+        'user_service' => 'zf2_rollout_user',
         'storage_service' => 'zf2_rollout_storage_dummy'
     ],
     'service_manager' => [

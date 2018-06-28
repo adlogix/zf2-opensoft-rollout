@@ -40,7 +40,7 @@ final class RolloutCollectorFactoryTest extends TestCase
     /**
      * @test
      */
-    public function createService_withoutRolloutUserDefined_shouldThrowExplicitException()
+    public function createService_withoutRolloutUserServiceDefined_shouldThrowExplicitException()
     {
         ServiceManagerFactory::overrideModuleConfiguration('testing.config.php');
 
@@ -49,8 +49,9 @@ final class RolloutCollectorFactoryTest extends TestCase
             ServiceManagerFactory::getServiceManager()
                 ->get('zf2_rollout.toolbar.collector');
             $this->fail('should have raised an exception');
-        } catch(\Exception $exception) {
-            $this->assertEquals($exception->getPrevious()->getMessage(), 'You must define a service for zf2_rollout_user');
+        } catch (\Exception $exception) {
+            $this->assertEquals('You must define a service for rollout user_service.',
+                $exception->getPrevious()->getMessage());
         }
     }
 }
