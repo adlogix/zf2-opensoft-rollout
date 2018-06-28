@@ -45,7 +45,7 @@ return [
 
 # Usage
 
-To call the rollout service from a zend controller:
+To retrieve the rollout service from a zend controller:
 
 ```
 <?php
