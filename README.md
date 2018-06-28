@@ -10,7 +10,7 @@ A ZF2 Module for [opensoft/rollout](https://github.com/opensoft/rollout)
 1. Install the module via composer by running:
 
 ```bash
-composer require adlogix/zf2-opensoft-rollout ~1.0
+composer require adlogix/zf2-opensoft-rollout:~1.0
 ```
 
 2. Add the `Adlogix\Zf2Rollout` module to the module section of your `config/application.config.php`
