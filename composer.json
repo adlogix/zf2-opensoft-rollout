@@ -29,7 +29,7 @@
     "zendframework/zend-mvc": "~2.7",
     "zendframework/zend-serializer": "~2.9",
     "zendframework/zend-servicemanager": "~2.7",
-    "doctrine/orm": "*",
+    "doctrine/orm": "~2.5",
     "phpunit/phpunit": "~5.0"
   },
   "autoload": {
