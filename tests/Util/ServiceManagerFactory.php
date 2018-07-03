@@ -31,6 +31,14 @@ class ServiceManagerFactory
     }
 
     /**
+     * @return array
+     */
+    public static function getConfig()
+    {
+        return static::$config;
+    }
+
+    /**
      * Config file name set in the tests directory that needs to override the predefined one
      *
      * @param string $configFile

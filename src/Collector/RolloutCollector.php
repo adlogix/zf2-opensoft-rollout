@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Collector;
+namespace Adlogix\Zf2Rollout\Collector;
 
 
 use Opensoft\Rollout\Rollout;

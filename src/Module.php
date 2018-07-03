@@ -18,14 +18,14 @@ use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\ViewHelperProviderInterface;
 use Zend\ServiceManager\AbstractPluginManager;
 
-class Module implements ConfigProviderInterface, ViewHelperProviderInterface
+final class Module implements ConfigProviderInterface, ViewHelperProviderInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getConfig()
     {
-        return include __DIR__ . '/config/module.config.php';
+        return include __DIR__ . '/../config/module.config.php';
     }
 
     /**

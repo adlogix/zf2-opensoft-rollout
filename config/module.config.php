@@ -8,6 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
+use Adlogix\Zf2Rollout\Service\Controller\RolloutController;
+
 return [
 
     'rollout' => [
@@ -25,6 +28,21 @@ return [
         ]
     ],
 
+    'router' => array(
+        'routes' => array(
+            'rollout_feature_toggle' => array(
+                'type' => \Zend\Mvc\Router\Http\Segment::class,
+                'options' => array(
+                    'route' => '/_rollout_toggle/:feature[/]',
+                    'defaults' => array(
+                        'controller' => RolloutController::class,
+                        'action'     => 'toggleFeature',
+                    ),
+                ),
+            ),
+        ),
+    ),
+
     'view_manager' => [
         'template_path_stack' => [
             __DIR__ . '/../view',
@@ -32,6 +50,15 @@ return [
         'template_map' => [
             'zend-developer-tools/toolbar/rollout' => __DIR__ . '/../view/zend-developer-tools/toolbar/rollout.phtml',
         ],
+    ],
+
+    'controllers' => [
+
+        'factories' => [
+
+            RolloutController::class => \Adlogix\Zf2Rollout\Service\Factory\RolloutControllerFactory::class
+        ]
+
     ],
 
     'service_manager' => [
@@ -50,6 +77,7 @@ return [
             'zf2_rollout_storage_doctrine' => Adlogix\Zf2Rollout\Service\Factory\DoctrineORMStorageFactory::class,
 
             'zf2_rollout' => Adlogix\Zf2Rollout\Service\Factory\RolloutFactory::class,
+            'zf2_rollout_user' => \Adlogix\Zf2Rollout\Service\Factory\RolloutUserFactory::class,
 
             'zf2_rollout.toolbar.collector' => \Adlogix\Zf2Rollout\Service\Factory\RolloutCollectorFactory::class
 

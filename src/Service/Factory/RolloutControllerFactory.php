@@ -11,17 +11,19 @@
 
 namespace Adlogix\Zf2Rollout\Service\Factory;
 
-use Adlogix\Zf2Rollout\Collector\RolloutCollector;
+
+use Adlogix\Zf2Rollout\Service\Controller\RolloutController;
 use Interop\Container\ContainerInterface;
 use Opensoft\Rollout\Rollout;
 use Opensoft\Rollout\RolloutUserInterface;
+use Zend\Mvc\Controller\ControllerManager;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * @author Toni Van de Voorde <toni@adlogix.eu>
  */
-final class RolloutCollectorFactory implements FactoryInterface
+final class RolloutControllerFactory implements FactoryInterface
 {
 
     /**
@@ -37,6 +39,9 @@ final class RolloutCollectorFactory implements FactoryInterface
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
+        if ($container instanceof ControllerManager) {
+            $container = $container->getServiceLocator();
+        }
 
         /** @var Rollout $rollout */
         $rollout = $container->get('zf2_rollout');
@@ -44,6 +49,6 @@ final class RolloutCollectorFactory implements FactoryInterface
         /** @var RolloutUserInterface $rolloutUser */
         $rolloutUser = $container->get('zf2_rollout_user');
 
-        return new RolloutCollector($rollout, $rolloutUser);
+        return new RolloutController($rollout, $rolloutUser);
     }
 }

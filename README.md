@@ -47,7 +47,7 @@ return [
 
 To retrieve the rollout service from a zend controller:
 
-```
+```php
 <?php
 
 $rollout = $this->getServiceLocator()->get('zf2_rollout');
@@ -57,6 +57,38 @@ Refer to the documentation of [opensoft/rollout](https://github.com/opensoft/rol
 
 ## Zend Developer Toolbar
 
-The module comes with support for the zend developer toolbar. Currently the toolbar only shows the list of features and enable status for a given user.
+The module comes with support for the zend developer toolbar.
 
 ![zf2-adlogix-rollout zend developer tools](docs/rollout-zdt.png)
+
+:warning: The ZDT rollout comes with a quick toggling action, allowing the user to quickly enable/disable a feature by clicking on one of the listed feature elements in the toolbar. Make sure to only authorise these actions in development mode. :warning:
+
+An example of enabling the end points with BjyAuthorize:
+
+```php
+<?php
+
+// config/autoload/authorization.development.php
+
+use Adlogix\Zf2Rollout\Service\Controller\RolloutController;
+
+return [
+    'bjyauthorize' => [
+
+        'guards' => [
+
+            // Add this if you are adding guards on controllers
+            'BjyAuthorize\Guard\Controller' => [
+                ['controller' => RolloutController::class, 'roles' => ['guest','user']],
+            ],
+
+            // Add this if you are adding guards on routes
+            'BjyAuthorize\Guard\Route' => [
+                ['route' => 'rollout_feature_toggle', 'roles' => ['guest','user']],
+            ],
+        ],
+
+    ],
+];
+
+```
