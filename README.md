@@ -47,7 +47,7 @@ return [
 
 To retrieve the rollout service from a zend controller:
 
-```
+```php
 <?php
 
 $rollout = $this->getServiceLocator()->get('zf2_rollout');
@@ -65,7 +65,7 @@ The module comes with support for the zend developer toolbar.
 
 An example of enabling the end points with BjyAuthorize:
 
-```
+```php
 <?php
 
 // config/autoload/authorization.development.php
