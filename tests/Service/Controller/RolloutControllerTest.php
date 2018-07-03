@@ -16,6 +16,9 @@ use Adlogix\Zf2Rollout\Test\Util\ServiceManagerFactory;
 use Opensoft\Rollout\Rollout;
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
+/**
+ * @author Toni Van de Voorde <toni@adlogix.eu>
+ */
 final class RolloutControllerTest extends AbstractHttpControllerTestCase
 {
     /**
