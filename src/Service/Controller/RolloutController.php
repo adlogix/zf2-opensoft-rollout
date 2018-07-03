@@ -68,9 +68,8 @@ final class RolloutController extends AbstractActionController
         /** @var Request $request */
         $request = $this->getRequest();
 
-        /** @var Referer $headers */
         $headers = $request->getHeader('Referer', '/');
 
-        return $headers->getUri();
+        return $headers instanceof Referer ? $headers->getUri() : (string)$headers;
     }
 }

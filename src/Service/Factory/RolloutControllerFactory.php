@@ -16,6 +16,7 @@ use Adlogix\Zf2Rollout\Service\Controller\RolloutController;
 use Interop\Container\ContainerInterface;
 use Opensoft\Rollout\Rollout;
 use Opensoft\Rollout\RolloutUserInterface;
+use Zend\Mvc\Controller\ControllerManager;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -38,6 +39,9 @@ final class RolloutControllerFactory implements FactoryInterface
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
+        if ($container instanceof ControllerManager) {
+            $container = $container->getServiceLocator();
+        }
 
         /** @var Rollout $rollout */
         $rollout = $container->get('zf2_rollout');
