@@ -64,3 +64,31 @@ The module comes with support for the zend developer toolbar.
 :warning: The ZDT rollout comes with a quick toggling action, allowing the user to quickly enable/disable a feature by clicking on one of the listed feature elements in the toolbar. Make sure to only authorise these actions in development mode. :warning:
 
 An example of enabling the end points with BjyAuthorize:
+
+```
+<?php
+
+// config/autoload/authorization.development.php
+
+use Adlogix\Zf2Rollout\Service\Controller\RolloutController;
+
+return [
+    'bjyauthorize' => [
+
+        'guards' => [
+
+            // Add this if you are adding guards on controllers
+            'BjyAuthorize\Guard\Controller' => [
+                ['controller' => RolloutController::class, 'roles' => ['guest','user']],
+            ],
+
+            // Add this if you are adding guards on routes
+            'BjyAuthorize\Guard\Route' => [
+                ['route' => 'rollout_feature_toggle', 'roles' => ['guest','user']],
+            ],
+        ],
+
+    ],
+];
+
+```
