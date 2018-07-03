@@ -57,6 +57,10 @@ Refer to the documentation of [opensoft/rollout](https://github.com/opensoft/rol
 
 ## Zend Developer Toolbar
 
-The module comes with support for the zend developer toolbar. Currently the toolbar only shows the list of features and enable status for a given user.
+The module comes with support for the zend developer toolbar.
 
 ![zf2-adlogix-rollout zend developer tools](docs/rollout-zdt.png)
+
+:warning: The ZDT rollout comes with a quick toggling action, allowing the user to quickly enable/disable a feature by clicking on one of the listed feature elements in the toolbar. Make sure to only authorise these actions in development mode. :warning:
+
+An example of enabling the end points with BjyAuthorize:
