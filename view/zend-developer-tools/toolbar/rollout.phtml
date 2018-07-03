@@ -1,4 +1,11 @@
 <?php /* @var $collector \Adlogix\Zf2Rollout\Collector\RolloutCollector */ ?>
+
+<?php
+function unescapedName($feature) {
+    return str_replace('_', ' ', $feature);
+}
+?>
+
 <div class="zdt-toolbar-entry">
     <div class="zdt-toolbar-preview">
         <img
@@ -10,10 +17,15 @@
     </div>
     <div class="zdt-toolbar-detail">
 
+        <span class="zdt-toolbar-info">
+            Available Features (<?php echo count($collector->features()); ?>):
+        </span>
+
         <?php foreach($collector->features() as $feature => $enabled): ?>
             <span class="zdt-toolbar-info">
                 <span class="zdt-detail-label">
-                    <a href="<?php echo $this->url('rollout_feature_toggle', ['feature' => $feature]); ?>" ><?php echo $feature ?></a></span>
+                    &raquo;
+                    <a href="<?php echo $this->url('rollout_feature_toggle', ['feature' => $feature]); ?>" ><?php echo unescapedName($feature) ?></a></span>
                 <span class="zdt-detail-value zdt-detail-value-right">&nbsp;&nbsp;
                     <span class="zdt-toolbar-status <?php echo $enabled ? 'zdt-toolbar-status-green' : 'zdt-toolbar-status-red' ?>">
                         <?php echo $enabled ? 'yes' : 'no'; ?>
