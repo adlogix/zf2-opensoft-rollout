@@ -38,6 +38,13 @@ return [
         // Required configuration if storage service is Adlogix\Zf2Rollout\Storage\Doctrine\DoctrineORMStorage
         'doctrine_storage' => [
             'class_name' => SomeFeatureEntity::class
+        ],
+        
+        //Describes the features with a description - not required -
+        'features' => [
+            'feature_1' => [
+                'description' => 'The description of the feature.' 
+            ]
         ]
     ],
 ]
@@ -54,6 +61,31 @@ $rollout = $this->getServiceLocator()->get('zf2_rollout');
 ```
 
 Refer to the documentation of [opensoft/rollout](https://github.com/opensoft/rollout) for more information on how to use the library.
+
+## Describe the features
+
+Since the Rollout library doesn't have (yet) a functionality to describe its feature flags, you can define them through this module. To do so, simply add your feature flag identifier in the 'features' sections of the rollout configuration as shown here:
+
+```php
+<?php
+return [
+    'rollout' => [
+        
+        //Describes the features with a description - not required -
+        'features' => [
+            'feature_1' => [
+                'description' => '' 
+            ]
+        ]
+    ],
+];
+```
+
+To display the description in a view you have to call the view helper : **rollout_description**. If the description is not found in the configuration, *null* will be returned.
+
+```php
+echo $this->rollout_description('feature_1');
+```
 
 ## Zend Developer Toolbar
 

@@ -25,7 +25,9 @@ return [
 
         'doctrine_storage' => [
             'class_name' => ''
-        ]
+        ],
+
+        'features' => []
     ],
 
     'router' => array(
