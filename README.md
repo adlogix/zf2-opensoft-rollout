@@ -71,7 +71,7 @@ Since the Rollout library doesn't have (yet) a functionality to describe its fea
 return [
     'rollout' => [
         
-        //Describes the features with a description - not required -
+        //(Optional) Describes the features with a description
         'features' => [
             'feature_1' => [
                 'description' => '' 
