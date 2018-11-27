@@ -49,7 +49,7 @@ class DescriptionTest extends \PHPUnit_Framework_TestCase
      */
     public function invoke_NoDescriptionKey_NullReturned()
     {
-        $this->assertNull($this->createHelper()->__invoke('feature_2'));
+        $this->assertEquals('', $this->createHelper()->__invoke('feature_2'));
     }
 
     /**
@@ -57,6 +57,6 @@ class DescriptionTest extends \PHPUnit_Framework_TestCase
      */
     public function invoke_NoDescriptionFound_NullReturned()
     {
-        $this->assertNull($this->createHelper()->__invoke('feature_3'));
+        $this->assertEquals('', $this->createHelper()->__invoke('feature_3'));
     }
 }

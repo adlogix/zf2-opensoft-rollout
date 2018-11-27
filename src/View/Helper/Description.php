@@ -42,7 +42,7 @@ class Description extends AbstractHelper
     public function __invoke($feature)
     {
         if (!isset($this->features[$feature]['description'])) {
-            return null;
+            return '';
         }
 
         return $this->features[$feature]['description'];

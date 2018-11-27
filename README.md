@@ -81,7 +81,7 @@ return [
 ];
 ```
 
-To display the description in a view you have to call the view helper : **rollout_description**. If the description is not found in the configuration, *null* will be returned.
+To display the description in a view you have to call the view helper : **rollout_description**. If the description is not found in the configuration, an empty string will be returned.
 
 ```php
 echo $this->rollout_description('feature_1');
