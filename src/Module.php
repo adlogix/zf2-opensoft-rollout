@@ -44,13 +44,7 @@ final class Module implements ConfigProviderInterface, ViewHelperProviderInterfa
                 'rollout_description' => function (AbstractPluginManager $pluginManager) {
                     $serviceLocator = $pluginManager->getServiceLocator();
                     $rolloutConfig = $serviceLocator->get('zf2_rollout_config');
-
-                    $features = [];
-                    if (isset($rolloutConfig['features'])) {
-                        $features = $rolloutConfig['features'];
-                    }
-
-                    return new View\Helper\Description($features);
+                    return new View\Helper\Description($rolloutConfig['features']);
                 }
             ],
         ];
