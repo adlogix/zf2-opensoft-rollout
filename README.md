@@ -40,7 +40,7 @@ return [
             'class_name' => SomeFeatureEntity::class
         ],
         
-        //Describes the features with a description - not required -
+        // (Optional) Describes the features with a description
         'features' => [
             'feature_1' => [
                 'description' => 'The description of the feature.' 
